@@ -1,21 +1,6 @@
 #!/bin/bash
 
-# Update present packages
-echo "Updating present packages ..."
-# sudo dpkg --configure -a
-# sudo apt-get --yes update
-# prevent kernel upgrade
-# sudo apt-mark hold linux-image-generic linux-headers-generic
-# sudo apt-get --yes upgrade
-
-
-# # Remove unwanted packages
-# echo "Removing unwanted packages ..."
-# sudo apt-get remove python3 python --yes
-
-
 # # Install some neccesary/useful tools
-
 
 
 # # Install zsh shell

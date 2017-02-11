@@ -23,8 +23,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.hostname = "scibox"
 
-  config.vm.provision :shell, :path => "bootstrap.sh"
-
+  if(ENV['UPGRADE']) then
+    config.vm.provision :shell, :path => "bootstrap.sh"
+  else
+    config.vm.provision :shell, :path => "bootstrap-with-upgrade.sh"
+  end
+  
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
