@@ -23,8 +23,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.hostname = "scibox"
 
-  config.vm.provision :shell, path: "bootstrap.sh"
-  config.vm.provision :shell, run: "always", inline: $init
+  config.vm.provision :shell, :path => "bootstrap.sh"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
