@@ -16,6 +16,7 @@ cd ~
 git clone https://github.com/infiRD/Scibox.git
 cd Scibox
 vagrant up && vagrant ssh
+
 ```
 
 ## Based on
