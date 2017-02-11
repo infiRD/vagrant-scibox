@@ -1,7 +1,7 @@
 # Scibox
 
 Vagrant box aimed at bootstraping the work with scientific computation packages
-like [jupyter](http://jupyter.org/) and [julia](http://julialang.org/)
+like [jupyter](http://jupyter.org/) and [julia](http://julialang.org/). Currently it is in pre-alpha stage.
 
 ## Getting Started
 
