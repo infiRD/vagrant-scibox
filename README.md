@@ -1,11 +1,15 @@
 # Scibox
 
 Vagrant box aimed at bootstraping the work with scientific computation packages
-like [jupyter](http://jupyter.org/) and [julia](http://julialang.org/). Currently it is in pre-alpha stage.
+like [jupyter](http://jupyter.org/) and [julia](http://julialang.org/). 
+
+Currently it is in pre-alpha stage.
 
 ## Getting Started
 
-First of all you will need to [install vagrant](https://www.vagrantup.com/docs/installation/). Then:
+First of all you will need to [install vagrant](https://www.vagrantup.com/docs/installation/). 
+
+Then:
 
 ```bash
 cd ~
