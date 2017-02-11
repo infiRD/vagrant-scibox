@@ -1,12 +1,15 @@
 #!/bin/bash
 
-# # Install some neccesary/useful tools
+# Install some neccesary/useful tools
+echo "Installing useful tools..."
+sudo apt-get install -y -q curl unzip git zsh
 
-
-# # Install zsh shell
-# echo "Removing unwanted packages ..."
-# sudo apt-get remove python3 python --yes
-
+# Install zsh shell with oh-my-zsh
+# https://github.com/robbyrussell/oh-my-zsh
+rm ~/.oh-my-zsh -rf
+git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+sudo chsh -s /bin/zsh vagrant
 
 
 # # install conda: https://conda.io/docs/help/silent.html#linux-and-os-x

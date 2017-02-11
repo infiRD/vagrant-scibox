@@ -12,9 +12,14 @@ echo "Removing unwanted packages..."
 
 # Upgrade
 echo "Upgrading..."
-# prevent any prompt during upgrade: http://askubuntu.com/questions/146921/how-do-i-apt-get-y-dist-upgrade-without-a-grub-config-prompt
-sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade
+# prevent UI and accept default options: 
+# this is neccesary because otherwise for example grub will 
+# block the process with GUI, which is not available, so 
+# provisioning would freeze
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y -q -o \
+Dpkg::Options::="--force-confdef" -o \
+Dpkg::Options::="--force-confold" upgrade
 
-./bootstrap.sh
+
 
 

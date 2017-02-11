@@ -24,11 +24,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.hostname = "scibox"
 
   if(ENV['UPGRADE']) then
-    config.vm.provision :shell, :path => "bootstrap.sh"
-  else
-    config.vm.provision :shell, :path => "bootstrap-with-upgrade.sh"
+    config.vm.provision :shell, :path => "upgrade.sh"
   end
   
+  config.vm.provision :shell, :path => "bootstrap.sh"
+
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
@@ -38,8 +38,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
 
-  config.vm.network "forwarded_port", guest: 8888, host: 18888
-  config.vm.network "forwarded_port", guest: 8000, host: 18000
+  config.vm.network "forwarded_port", guest: 8888, host: 18889
+  config.vm.network "forwarded_port", guest: 8000, host: 18001
   
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
