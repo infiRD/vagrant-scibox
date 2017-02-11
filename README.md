@@ -7,7 +7,7 @@ like [jupyter](http://jupyter.org/) and [julia](http://julialang.org/)
 
 ```bash
 cd ~
-git clone ...
+git clone https://github.com/infiRD/Scibox.git
 cd Scibox
 vagrant up && vagrant ssh
 ```
@@ -21,8 +21,7 @@ vagrant up && vagrant ssh
 * [julia](https://github.com/JuliaLang/julia) - Julia language
 
 ## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags)
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/infiRD/Scibox/tags)
 
 ## Authors
 
