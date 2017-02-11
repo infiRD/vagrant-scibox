@@ -5,6 +5,8 @@ like [jupyter](http://jupyter.org/) and [julia](http://julialang.org/)
 
 ## Getting Started
 
+First of all you will need to [install vagrant](https://www.vagrantup.com/docs/installation/). Then:
+
 ```bash
 cd ~
 git clone https://github.com/infiRD/Scibox.git
