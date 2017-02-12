@@ -16,11 +16,17 @@ cd ~
 git clone https://github.com/infiRD/Scibox.git
 cd Scibox
 vagrant up && vagrant ssh
+```
 
+If you want to upgrade the box to the most actual version, run following:
+
+```bash
+UPGRADE=true vagrant up && vagrant reload && vagrant ssh
 ```
 
 ## Based on
 
+* [Ubuntu 16.04.1 LTS (Xenial Xerus)](http://releases.ubuntu.com/16.04/) - Linux distro
 * [VAGRANT](https://www.vagrantup.com/) - VM manager
 * [conda](https://github.com/conda/conda) - Conda package manager
 * [jupyter/notebook](https://github.com/jupyter/notebook) - jupyter notebooks

@@ -91,7 +91,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # reboot is required if box was upgraded 
   if(ENV['UPGRADE']) then
-      print "The machine after upgrade needs reboot. Please run 'vagrant reload'"
+      print "The machine after upgrade needs reboot. Please run 'vagrant reload'\n"
       # this doesnt work very well - it will caus vagrant to display disconnection
       # message during provisioning. vagrant-reload plugin would be probably better
       # see: https://github.com/aidanns/vagrant-reload

@@ -27,6 +27,7 @@ rm $HOME/miniconda-latest.sh
 # -------------------------------------------------------------------
 
 # ==================== install conda packages =======================
+conda install jupyter ipython numpy scipy pandas matplotlib -y
 
 
 
