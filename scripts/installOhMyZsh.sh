@@ -2,7 +2,7 @@
 
 # Install some neccesary/useful tools
 echo "Replacing shell with oh-my-zsh..."
-sh wait_for_apt.sh
+sudo ./waitForApt.sh
 sudo dpkg --configure -a
 sudo apt-get install -y -q curl unzip git zsh
 
@@ -14,4 +14,3 @@ cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
 # replace shell - must be sudo
 sudo chsh -s /bin/zsh vagrant
-

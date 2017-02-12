@@ -21,39 +21,45 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ]
   end
   
+  # ========= transfer and configure waitForApt.sh script ==============
+  # - tranfer script
+  # - replace remove windows like line ending with linux like
+  # - make executable
+  config.vm.provision "file", source: "scripts/waitForApt.sh", destination: "waitForApt.sh"
+  config.vm.provision :shell, privileged: false, inline: <<-SHELL
+    cat waitForApt.sh | tr -d '\15\32' > waitForApt.sh.tmp 
+    mv waitForApt.sh.tmp waitForApt.sh
+    chmod +x waitForApt.sh
+  SHELL
+  # -------------------------------------------------------------------
+
   # This should be a work around for error:
   # E: Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)
-  config.vm.provision :shell, privileged: true, inline:  <<-SHELL 
-    echo "Disabling automatic update service..."
-    systemctl disable apt-daily.service
-    systemctl disable apt-daily.timer 
-  SHELL
+  # it is actually caused by ubuntu 16.04 daily autoupdater which runs 
+  # immediately after startup of new box
+  config.vm.provision :shell, privileged: true, :path => "scripts/disableAutoUpdate.sh"
 
   if(ENV['UPGRADE']) then
     config.vm.provision :shell, privileged: true, :path => "scripts/upgrade.sh"
   end
   
+  config.vm.provision :shell, privileged: false, :path => "scripts/installOhMyZsh.sh"
+
   config.vm.provision :shell, privileged: false, :path => "scripts/bootstrap.sh"
 
-  # =============== replace shell with oh-my-zsh ==================
-  # - install git and zsh prerequisites 
-  # - clone Oh My Zsh from the git repo
-  # - copy in the default .zshrc config file
-  config.vm.provision :shell, privileged: false, inline: <<-SHELL
-    sudo apt-get install -y -q curl unzip git zsh
-	  git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-	  cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-  SHELL
-  # - change the vagrant user's shell to use zsh
+  # # =============== replace shell with oh-my-zsh ==================
+  # # - install git and zsh prerequisites 
+  # # - clone Oh My Zsh from the git repo
+  # # - copy in the default .zshrc config file
+  # config.vm.provision :shell, privileged: false, inline: <<-SHELL
+  #   sudo apt-get install -y -q curl unzip git zsh
+	#   git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+	#   cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+  # SHELL
+  # # # - change the vagrant user's shell to use zsh
   
-  config.vm.provision :shell, inline: "chsh -s /bin/zsh vagrant"
-  # ---------------------------------------------------------------
-
-  config.vm.provision :shell, privileged: true, inline:  <<-SHELL 
-    echo "Enabling automatic update service..."
-    systemctl enable apt-daily.service
-    systemctl enable apt-daily.timer 
-  SHELL
+  # config.vm.provision :shell, inline: "chsh -s /bin/zsh vagrant"
+  # # ---------------------------------------------------------------
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -78,7 +84,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.synced_folder "../data", "/vagrant_data"
 
   config.vm.synced_folder "src", "/home/vagrant/src", create: true
-
  
   # View the documentation for the provider you are using for more
   # information on available options.
