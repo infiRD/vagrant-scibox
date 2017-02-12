@@ -44,7 +44,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # run bootstraping script (main)
   config.vm.provision :shell, privileged: false, :path => "scripts/bootstrap.sh"
   # cleanup after provisioning
-  config.vm.provision :shell, privileged: true, :path => "scripts/cleanup.sh"
+  config.vm.provision :shell, privileged: false, :path => "scripts/cleanup.sh"
   # -------------------------------------------------------------------
 
   # Create a forwarded port mapping which allows access to a specific port
