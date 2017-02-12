@@ -20,7 +20,9 @@ $HOME/miniconda-latest.sh -f -b -p $HOME/miniconda
 export PATH=$HOME/miniconda/bin:$PATH
 
 # and all future BASH and ZSH sessions PATH to point to conda
-printf "\n%s\n%s\n" "# add miniconda path:" "export PATH="$HOME/miniconda/bin:\$PATH"" >> $HOME/.zshrc >> $HOME/.bashrc
+printf "\n%s\n%s\n" "# add miniconda path:" "export PATH="$HOME/miniconda/bin:\$PATH"" >> $HOME/.zshrc
+printf "\n%s\n%s\n" "# add miniconda path:" "export PATH="$HOME/miniconda/bin:\$PATH"" >> $HOME/.bashrc
+
 rm $HOME/miniconda-latest.sh
 # -------------------------------------------------------------------
 

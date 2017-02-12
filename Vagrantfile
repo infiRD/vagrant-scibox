@@ -91,6 +91,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # reboot is required if box was upgraded 
   if(ENV['UPGRADE']) then
-      config.vm.provision :shell, privileged: true, :path => "scripts/reboot.sh"
+      print "The machine after upgrade needs reboot. Please run 'vagrant reload'"
+      # this doesnt work very well - it will caus vagrant to display disconnection
+      # message during provisioning. vagrant-reload plugin would be probably better
+      # see: https://github.com/aidanns/vagrant-reload
+      # config.vm.provision :shell, privileged: true, :path => "scripts/reboot.sh"
   end
 end
