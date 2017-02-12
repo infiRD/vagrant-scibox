@@ -21,16 +21,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ]
   end
   
-  # ========= transfer and configure waitForApt.sh script ==============
-  # - tranfer script
-  # - replace remove windows like line ending with linux like
-  # - make executable
+  # ============== transfer and configure scripts =====================
+  # - tranfer scripts
+  # - run preparation script
   config.vm.provision "file", source: "scripts/waitForApt.sh", destination: "waitForApt.sh"
-  config.vm.provision :shell, privileged: false, inline: <<-SHELL
-    cat waitForApt.sh | tr -d '\15\32' > waitForApt.sh.tmp 
-    mv waitForApt.sh.tmp waitForApt.sh
-    chmod +x waitForApt.sh
-  SHELL
+  config.vm.provision :shell, privileged: false, :path => "scripts/prepare.sh"
   # -------------------------------------------------------------------
 
   # This should be a work around for error:
@@ -39,27 +34,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # immediately after startup of new box
   config.vm.provision :shell, privileged: true, :path => "scripts/disableAutoUpdate.sh"
 
+  # ========================== provisioning ===========================
+  # - upgrade if specified by command: > UPGRADE=1 vagrant up
   if(ENV['UPGRADE']) then
     config.vm.provision :shell, privileged: true, :path => "scripts/upgrade.sh"
   end
-  
+  # replace shell with oh-my-zsh
   config.vm.provision :shell, privileged: false, :path => "scripts/installOhMyZsh.sh"
-
+  # run bootstraping script (main)
   config.vm.provision :shell, privileged: false, :path => "scripts/bootstrap.sh"
-
-  # # =============== replace shell with oh-my-zsh ==================
-  # # - install git and zsh prerequisites 
-  # # - clone Oh My Zsh from the git repo
-  # # - copy in the default .zshrc config file
-  # config.vm.provision :shell, privileged: false, inline: <<-SHELL
-  #   sudo apt-get install -y -q curl unzip git zsh
-	#   git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-	#   cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-  # SHELL
-  # # # - change the vagrant user's shell to use zsh
-  
-  # config.vm.provision :shell, inline: "chsh -s /bin/zsh vagrant"
-  # # ---------------------------------------------------------------
+  # cleanup after provisioning
+  config.vm.provision :shell, privileged: true, :path => "scripts/cleanup.sh"
+  # -------------------------------------------------------------------
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -102,4 +88,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL
+
+  # reboot is required if box was upgraded 
+  if(ENV['UPGRADE']) then
+      config.vm.provision :shell, privileged: true, :path => "scripts/reboot.sh"
+  end
 end
