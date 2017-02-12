@@ -2,8 +2,8 @@
 
 # Update package info
 echo "Updating package info..."
-sudo dpkg --configure -a
-sudo apt-get --yes update --fix-missing -q
+dpkg --configure -a
+apt-get --yes update --fix-missing -q
 
 # Remove unwanted packages
 echo "Removing unwanted packages..."
@@ -16,9 +16,9 @@ echo "Upgrading..."
 # this is neccesary because otherwise for example grub will 
 # block the process with GUI, which is not available, so 
 # provisioning would freeze
-sudo DEBIAN_FRONTEND=noninteractive apt-get -y -q -o \
-Dpkg::Options::="--force-confdef" -o \
-Dpkg::Options::="--force-confold" upgrade
+DEBIAN_FRONTEND=noninteractive apt-get -y -q -o \
+    Dpkg::Options::="--force-confdef" -o \
+    Dpkg::Options::="--force-confold" upgrade
 
 
 

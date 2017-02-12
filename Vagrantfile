@@ -3,17 +3,7 @@
 
 VAGRANTFILE_API_VERSION = "2"
 
-# All Vagrant configuration is done below. The "2" in Vagrant.configure
-# configures the configuration version (we support older styles for
-# backwards compatibility). Please don't change it unless you know what
-# you're doing.
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  # The most common configuration options are documented and commented below.
-  # For a complete reference, please see the online documentation at
-  # https://docs.vagrantup.com.
-
-  # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://atlas.hashicorp.com/search.
   
   # There is a problem with 'ubuntu/xenial64' with default user that will be 'ubuntu'
   # instead of 'vagrant'. We will use 'v0rtex/xenial64' instead as mentioned in: 
@@ -23,16 +13,32 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.hostname = "scibox"
 
-  if(ENV['UPGRADE']) then
-    config.vm.provision :shell, :path => "upgrade.sh"
+  config.vm.provider "virtualbox" do |vb|
+     vb.customize [
+      "modifyvm", :id,
+      "--memory", "4096",
+      "--cpus", "4"
+    ]
   end
   
-  config.vm.provision :shell, :path => "bootstrap.sh"
+  if(ENV['UPGRADE']) then
+    config.vm.provision :shell, privileged: true, :path => "scripts/upgrade.sh"
+  end
+  
+  config.vm.provision :shell, privileged: false, :path => "scripts/bootstrap.sh"
 
-  # Disable automatic box update checking. If you disable this, then
-  # boxes will only be checked for updates when the user runs
-  # `vagrant box outdated`. This is not recommended.
-  # config.vm.box_check_update = false
+  # =============== replace shell with oh-my-zsh ==================
+  # - install git and zsh prerequisites 
+  # - clone Oh My Zsh from the git repo
+  # - copy in the default .zshrc config file
+  config.vm.provision :shell, privileged: false, inline: <<-SHELL
+    sudo apt-get install -y -q curl unzip git zsh
+	  git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+	  cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+  SHELL
+  # - change the vagrant user's shell to use zsh
+  config.vm.provision :shell, inline: "chsh -s /bin/zsh vagrant"
+  # ---------------------------------------------------------------
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -58,19 +64,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.synced_folder "src", "/home/vagrant/src", create: true
 
-  # Provider-specific configuration so you can fine-tune various
-  # backing providers for Vagrant. These expose provider-specific options.
-  # Example for VirtualBox:
-  
-  config.vm.provider "virtualbox" do |vb|
-     vb.memory = "4096"
-     vb.customize [
-      "modifyvm", :id,
-      "--memory", "256",
-      "--cpus", "6"
-    ]
-  end
-  
+ 
   # View the documentation for the provider you are using for more
   # information on available options.
 
