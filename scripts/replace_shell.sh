@@ -2,6 +2,7 @@
 
 # Install some neccesary/useful tools
 echo "Replacing shell with oh-my-zsh..."
+sh wait_for_apt.sh
 sudo dpkg --configure -a
 sudo apt-get install -y -q curl unzip git zsh
 

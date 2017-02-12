@@ -21,6 +21,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ]
   end
   
+  # This should be a work around for error:
+  # E: Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)
+  config.vm.provision :shell, privileged: true, inline:  <<-SHELL 
+    echo "Disabling automatic update service..."
+    systemctl disable apt-daily.service
+    systemctl disable apt-daily.timer 
+  SHELL
+
   if(ENV['UPGRADE']) then
     config.vm.provision :shell, privileged: true, :path => "scripts/upgrade.sh"
   end
@@ -37,15 +45,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	  cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
   SHELL
   # - change the vagrant user's shell to use zsh
+  
   config.vm.provision :shell, inline: "chsh -s /bin/zsh vagrant"
   # ---------------------------------------------------------------
+
+  config.vm.provision :shell, privileged: true, inline:  <<-SHELL 
+    echo "Enabling automatic update service..."
+    systemctl enable apt-daily.service
+    systemctl enable apt-daily.timer 
+  SHELL
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
 
-  config.vm.network "forwarded_port", guest: 8888, host: 18889
-  config.vm.network "forwarded_port", guest: 8000, host: 18001
+  config.vm.network "forwarded_port", guest: 8888, host: 18888
+  config.vm.network "forwarded_port", guest: 8000, host: 18000
   
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.

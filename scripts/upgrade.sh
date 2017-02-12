@@ -2,6 +2,7 @@
 
 # Update package info
 echo "Updating package info..."
+sh wait_for_apt.sh
 dpkg --configure -a
 apt-get --yes update --fix-missing -q
 
@@ -12,6 +13,7 @@ echo "Removing unwanted packages..."
 
 # Upgrade
 echo "Upgrading..."
+sh wait_for_apt.sh
 # prevent UI and accept default options: 
 # this is neccesary because otherwise for example grub will 
 # block the process with GUI, which is not available, so 
