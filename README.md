@@ -18,7 +18,7 @@ cd Scibox
 vagrant up && vagrant ssh
 ```
 
-If you want to upgrade the box to the most actual version, run following:
+If you want to upgrade linux distribution in the box, run following:
 
 ```bash
 UPGRADE=true vagrant up && vagrant reload && vagrant ssh
