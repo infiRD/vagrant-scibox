@@ -2,12 +2,12 @@
 
 # Install some neccesary/useful tools
 echo "Replacing shell with oh-my-zsh..."
-sudo ./waitForApt.sh
-sudo dpkg --configure -a
-sudo apt-get install -y -q curl unzip git zsh
 
 # Install zsh shell with oh-my-zsh
 # https://github.com/robbyrussell/oh-my-zsh
+sudo ./waitForApt.sh
+sudo apt-get install -y -q zsh
+
 rm ~/.oh-my-zsh -rf
 git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh 2>&1
 

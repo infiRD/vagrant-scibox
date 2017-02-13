@@ -20,13 +20,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       "--cpus", "4"
     ]
   end
-  
-  # =================== transfer and configure scripts =====================
-  # - tranfer scripts
-  # - run preparation script
-  config.vm.provision "file", source: "scripts/waitForApt.sh", destination: "waitForApt.sh"
-  config.vm.provision :shell, privileged: false, :path => "scripts/prepare.sh"
-  # ------------------------------------------------------------------------
 
   # This should be a work around for error:
   # E: Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)
@@ -34,11 +27,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # immediately after startup of new box
   config.vm.provision :shell, privileged: true, :path => "scripts/disableAutoUpdate.sh"
 
+  # =================== transfer and configure scripts =====================
+  # - tranfer scripts
+  # - run preparation script
+  config.vm.provision "file", source: "scripts/waitForApt.sh", destination: "waitForApt.sh"
+  config.vm.provision :shell, privileged: false, :path => "scripts/prepare.sh"
+  # ------------------------------------------------------------------------
+
   # ============================= provisioning =============================
   # - upgrade if specified by command: > UPGRADE=1 vagrant up
   if(ENV['UPGRADE']) then
     config.vm.provision :shell, privileged: true, :path => "scripts/upgrade.sh"
   end
+  # install crucial tools / packages
+  config.vm.provision :shell, privileged: false, :path => "scripts/crucial.sh"
   # replace shell with oh-my-zsh
   config.vm.provision :shell, privileged: false, :path => "scripts/installOhMyZsh.sh"
   # run bootstraping script (main)
@@ -102,9 +104,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 
   # ============================= always run =============================
-  config.vm.provision "shell", run: "always", privileged: false, inline: <<-SHELL
-    jupyter notebook --notebook-dir=~/src --no-browser --ip=0.0.0.0 &
-  SHELL
+  # config.vm.provision "shell", run: "always", privileged: false, inline: <<-SHELL
+  #   jupyter lab --notebook-dir=~/src --no-browser --ip=0.0.0.0 &
+  # SHELL
 
   # ----------------------------------------------------------------------
 
