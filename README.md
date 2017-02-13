@@ -26,6 +26,12 @@ UPGRADE=true vagrant up && vagrant reload && vagrant ssh
 
 After proper startup, jupyter notebook should be available on [http://localhost:8888](http://localhost:8888)
 
+You can find security token required by jupyter by executing inside Scibox:
+
+```bash
+jupyter notebook list
+```
+
 ## Based on
 
 * [Ubuntu 16.04.1 LTS (Xenial Xerus)](http://releases.ubuntu.com/16.04/) - Linux distro
