@@ -21,12 +21,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ]
   end
   
-  # ============== transfer and configure scripts =====================
+  # =================== transfer and configure scripts =====================
   # - tranfer scripts
   # - run preparation script
   config.vm.provision "file", source: "scripts/waitForApt.sh", destination: "waitForApt.sh"
   config.vm.provision :shell, privileged: false, :path => "scripts/prepare.sh"
-  # -------------------------------------------------------------------
+  # ------------------------------------------------------------------------
 
   # This should be a work around for error:
   # E: Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)
@@ -34,7 +34,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # immediately after startup of new box
   config.vm.provision :shell, privileged: true, :path => "scripts/disableAutoUpdate.sh"
 
-  # ========================== provisioning ===========================
+  # ============================= provisioning =============================
   # - upgrade if specified by command: > UPGRADE=1 vagrant up
   if(ENV['UPGRADE']) then
     config.vm.provision :shell, privileged: true, :path => "scripts/upgrade.sh"
@@ -45,7 +45,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, privileged: false, :path => "scripts/bootstrap.sh"
   # cleanup after provisioning
   config.vm.provision :shell, privileged: false, :path => "scripts/cleanup.sh"
-  # -------------------------------------------------------------------
+  
+  # configure always-run:
+  config.vm.provision "shell", run: "always", inline: <<-SHELL
+    jupyter notebook --notebook-dir=~/src --no-browser --ip=0.0.0.0
+  SHELL
+  # ------------------------------------------------------------------------
+
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,

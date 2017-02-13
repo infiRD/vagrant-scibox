@@ -27,7 +27,12 @@ rm $HOME/miniconda-latest.sh
 # -------------------------------------------------------------------
 
 # ==================== install conda packages =======================
-conda install jupyter ipython numpy scipy pandas matplotlib -y
+conda update conda 
+conda install jupyter ipython numpy scipy pandas matplotlib anaconda-client -y
+
+# jupyter lab
+# see: https://github.com/jupyterlab/jupyterlab
+conda install -c conda-forge jupyterlab
 
 
 

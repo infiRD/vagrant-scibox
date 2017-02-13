@@ -2,7 +2,10 @@
 # waitForApt.sh
 
 # Script that will wait for process locking /var/lib/dpkg/lock to finish
-#
+# - must be run as root
+# - will wait for 120s for lock to get freed
+# - if lock is not freed in time, will kill any apt instances running on background
+#   and will clean up after them 
 # inspired by script from stackoverflow user Radu Rădeanu
 # http://askubuntu.com/questions/132059/how-to-make-a-package-manager-wait-if-another-instance-of-apt-is-running
 
