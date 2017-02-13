@@ -24,6 +24,8 @@ If you want to upgrade linux distribution in the box, run following:
 UPGRADE=true vagrant up && vagrant reload && vagrant ssh
 ```
 
+After proper startup, jupyter notebook should be available on [http://localhost:8888](http://localhost:8888)
+
 ## Based on
 
 * [Ubuntu 16.04.1 LTS (Xenial Xerus)](http://releases.ubuntu.com/16.04/) - Linux distro
