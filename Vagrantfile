@@ -5,7 +5,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
-  # There is a problem with 'ubuntu/xenial64' with default user that will be 'ubuntu'
+  # There is a problem with 'ubuntu/xenial64' with the default user that will be 'ubuntu'
   # instead of 'vagrant'. We will use 'v0rtex/xenial64' instead as mentioned in: 
   # http://askubuntu.com/questions/832137/ubuntu-xenial64-box-password
   config.vm.box = "v0rtex/xenial64"
@@ -46,10 +46,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # cleanup after provisioning
   config.vm.provision :shell, privileged: false, :path => "scripts/cleanup.sh"
   
-  # configure always-run:
-  config.vm.provision "shell", run: "always", inline: <<-SHELL
-    jupyter notebook --notebook-dir=~/src --no-browser --ip=0.0.0.0
-  SHELL
   # ------------------------------------------------------------------------
 
 
@@ -103,4 +99,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # see: https://github.com/aidanns/vagrant-reload
       # config.vm.provision :shell, privileged: true, :path => "scripts/reboot.sh"
   end
+
+
+  # ============================= always run =============================
+  config.vm.provision "shell", run: "always", privileged: false, inline: <<-SHELL
+    jupyter notebook --notebook-dir=~/src --no-browser --ip=0.0.0.0 &
+  SHELL
+
+  # ----------------------------------------------------------------------
+
 end
