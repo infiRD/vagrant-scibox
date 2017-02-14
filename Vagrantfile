@@ -45,6 +45,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, privileged: false, :path => "scripts/installOhMyZsh.sh"
   # run bootstraping script (main)
   config.vm.provision :shell, privileged: false, :path => "scripts/bootstrap.sh"
+  # run Julia bootstraping script
+  config.vm.provision :shell, privileged: false, :path => "scripts/bootstrapJulia.jl"
   # cleanup after provisioning
   config.vm.provision :shell, privileged: false, :path => "scripts/cleanup.sh"
   
