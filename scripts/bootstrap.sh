@@ -45,6 +45,10 @@ rm julia.tar.gz
 # modify current shell session PATH to point to julia
 export PATH=$HOME/julia/bin:$PATH
 
+# install prerequisites for julia packages
+sudo apt-get install -y -q gettext hdf5-tools tcl8.5 libcairo2 \
+                           libpango1.0-0 tk8.5
+
 # -------------------------------------------------------------------
 
 

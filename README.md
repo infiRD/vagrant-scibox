@@ -24,9 +24,11 @@ If you want to upgrade linux distribution in the box, run following:
 UPGRADE=true vagrant up && vagrant reload && vagrant ssh
 ```
 
-After proper startup, jupyter notebook should be available on [http://localhost:8888](http://localhost:8888)
+After proper startup, jupyter notebook should be available on [http://localhost:8888?token=scibox](http://localhost:8888?token=scibox)
 
-You can find security token required by jupyter by executing inside Scibox:
+## Optional tasks
+
+Displaying currently running notebooks:
 
 ```bash
 jupyter notebook list
@@ -42,6 +44,7 @@ jupyter notebook list
 * [julia](https://github.com/JuliaLang/julia) - Julia language
 
 ## Versioning
+
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/infiRD/Scibox/tags)
 
 ## Authors
