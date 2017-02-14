@@ -108,7 +108,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # ============================= always run =============================
   config.vm.provision "shell", run: "always", privileged: false, inline: <<-SHELL
-    jupyter lab --notebook-dir=~/src &
+    jupyter notebook --notebook-dir=~/src &
   SHELL
   # ----------------------------------------------------------------------
 
