@@ -47,6 +47,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, privileged: false, :path => "scripts/bootstrap.sh"
   # run Julia bootstraping script
   config.vm.provision :shell, privileged: false, :path => "scripts/bootstrapJulia.jl"
+  # run configure Jupyter script
+  config.vm.provision :shell, privileged: false, :path => "scripts/configureJupyter.sh"
   # cleanup after provisioning
   config.vm.provision :shell, privileged: false, :path => "scripts/cleanup.sh"
   
@@ -104,12 +106,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # config.vm.provision :shell, privileged: true, :path => "scripts/reboot.sh"
   end
 
-
   # ============================= always run =============================
   # config.vm.provision "shell", run: "always", privileged: false, inline: <<-SHELL
-  #   jupyter lab --notebook-dir=~/src --no-browser --ip=0.0.0.0 &
+  #   jupyter lab --notebook-dir=~/src &
   # SHELL
-
   # ----------------------------------------------------------------------
 
 end
