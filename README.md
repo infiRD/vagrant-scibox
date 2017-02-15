@@ -24,7 +24,8 @@ If you want to upgrade linux distribution in the box, run following:
 UPGRADE=true vagrant up && vagrant reload && vagrant ssh
 ```
 
-After proper startup, jupyter notebook should be available on [http://localhost:8888?token=scibox](http://localhost:8888?token=scibox)
+After proper startup, jupyter notebook should be available on [http://localhost:8888?token=scibox](http://localhost:8888?token=scibox). 
+Project files should be placed in `projects` directory
 
 ## Optional tasks
 
