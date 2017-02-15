@@ -95,4 +95,4 @@ ENV/
 .idea/
 
 # projects folder - it is separate subproject
-projects/
+projects
