@@ -77,7 +77,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
 
-  config.vm.synced_folder "src", "/home/vagrant/src", create: true
+  config.vm.synced_folder "projects", "/home/vagrant/projects", create: true
  
   # View the documentation for the provider you are using for more
   # information on available options.
@@ -108,7 +108,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # ============================= always run =============================
   config.vm.provision "shell", run: "always", privileged: false, inline: <<-SHELL
-    jupyter notebook --notebook-dir=~/src &
+    jupyter notebook --notebook-dir=~/projects &
   SHELL
   # ----------------------------------------------------------------------
 
