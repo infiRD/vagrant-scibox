@@ -26,7 +26,7 @@ UPGRADE=true vagrant up && vagrant reload && vagrant ssh
 
 After proper startup, jupyter notebook should be available on [http://localhost:8888?token=scibox](http://localhost:8888?token=scibox).
 
-All project files should be placed in `projects` directory
+All project files should be placed in `projects` directory. My projects are in [separate repository](https://github.com/infiRD/Scibox-projects).
 
 ### Using Hydrogen
 
