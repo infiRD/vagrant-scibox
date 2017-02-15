@@ -94,3 +94,5 @@ ENV/
 # Idea
 .idea/
 
+# projects folder - it is separate subproject
+projects/
