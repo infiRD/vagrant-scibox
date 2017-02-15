@@ -26,7 +26,18 @@ UPGRADE=true vagrant up && vagrant reload && vagrant ssh
 
 After proper startup, jupyter notebook should be available on [http://localhost:8888?token=scibox](http://localhost:8888?token=scibox).
 
-Project files should be placed in `projects` directory
+All project files should be placed in `projects` directory
+
+### Using Hydrogen
+
+If you are using [Hydrogen](https://github.com/nteract/hydrogen), you will need to configure [hydrogen kernel gateways](https://github.com/nteract/hydrogen#remote-kernels-via-kernel-gateways):
+ - start [Atom IDE](https://atom.io/)
+ - press `Ctrl + ,` and go to `Packages > Hydrogen > Settings`
+ - into `List of kernel gateways to use` past following: 
+
+```json
+[{ "name": "Scibox", "options": {"baseUrl": "http://localhost:8888", "token": "scibox" }}]
+```
 
 ## Optional tasks
 
