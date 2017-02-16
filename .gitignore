@@ -94,5 +94,25 @@ ENV/
 # Idea
 .idea/
 
+# Visual Studio code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# VIM
+# swap
+*~
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-v][a-z]
+[._]sw[a-p]
+# session
+Session.vim
+# temporary
+netrwhist
+
 # projects folder - it is separate subproject
 projects
+
