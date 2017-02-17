@@ -14,10 +14,10 @@ wget --progress=bar:force:noscroll -O $HOME/miniconda-latest.sh \
 
 # - execute it
 chmod +x $HOME/miniconda-latest.sh
-$HOME/miniconda-latest.sh -f -b -p $HOME/miniconda
+$HOME/miniconda-latest.sh -f -b -p $HOME/.miniconda
 
 # modify current shell session PATH to point to conda
-export PATH=$HOME/miniconda/bin:$PATH
+export PATH=$HOME/.miniconda/bin:$PATH
 
 rm $HOME/miniconda-latest.sh
 # -------------------------------------------------------------------
@@ -40,11 +40,11 @@ wget --progress=bar:force:noscroll -O julia.tar.gz \
   https://julialang.s3.amazonaws.com/bin/linux/x64/0.5/julia-0.5.0-linux-x86_64.tar.gz 2>&1
 tar -xzf julia.tar.gz
 rm julia -rf
-mv `ls | grep julia- | grep -v tar` julia
+mv `ls | grep julia- | grep -v tar` .julia
 rm julia.tar.gz
 
 # modify current shell session PATH to point to julia
-export PATH=$HOME/julia/bin:$PATH
+export PATH=$HOME/.julia/bin:$PATH
 
 # install prerequisites for julia packages
 sudo apt-get install -y -q gettext hdf5-tools tcl8.5 libcairo2 \
@@ -54,7 +54,7 @@ sudo apt-get install -y -q gettext hdf5-tools tcl8.5 libcairo2 \
 
 
 # ========================= modify PATH =============================
-PATH_PREFIX="$HOME/miniconda/bin:$HOME/julia/bin:"
+PATH_PREFIX="$HOME/.miniconda/bin:$HOME/.julia/bin:"
 printf "\n%s\n%s\n" "# added path by vagrant provisioning:" \
        "export PATH="$PATH_PREFIX\$PATH"" > path_prefix.tmp
 

@@ -25,32 +25,32 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # E: Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)
   # it is actually caused by ubuntu 16.04 daily autoupdater which runs 
   # immediately after startup of new box
-  config.vm.provision :shell, privileged: true, :path => "scripts/disableAutoUpdate.sh"
+  config.vm.provision :shell, privileged: true, :path => ".provision/disableAutoUpdate.sh"
 
   # =================== transfer and configure scripts =====================
   # - tranfer scripts
   # - run preparation script
-  config.vm.provision "file", source: "scripts/waitForApt.sh", destination: "waitForApt.sh"
-  config.vm.provision :shell, privileged: false, :path => "scripts/prepare.sh"
+  config.vm.provision "file", source: ".provision/waitForApt.sh", destination: "waitForApt.sh"
+  config.vm.provision :shell, privileged: false, :path => ".provision/prepare.sh"
   # ------------------------------------------------------------------------
 
   # ============================= provisioning =============================
   # - upgrade if specified by command: > UPGRADE=1 vagrant up
   if(ENV['UPGRADE']) then
-    config.vm.provision :shell, privileged: true, :path => "scripts/upgrade.sh"
+    config.vm.provision :shell, privileged: true, :path => ".provision/upgrade.sh"
   end
   # install crucial tools / packages
-  config.vm.provision :shell, privileged: false, :path => "scripts/crucial.sh"
+  config.vm.provision :shell, privileged: false, :path => ".provision/crucial.sh"
   # replace shell with oh-my-zsh
-  config.vm.provision :shell, privileged: false, :path => "scripts/installOhMyZsh.sh"
+  config.vm.provision :shell, privileged: false, :path => ".provision/installOhMyZsh.sh"
   # run bootstraping script (main)
-  config.vm.provision :shell, privileged: false, :path => "scripts/bootstrap.sh"
+  config.vm.provision :shell, privileged: false, :path => ".provision/bootstrap.sh"
   # run Julia bootstraping script
-  config.vm.provision :shell, privileged: false, :path => "scripts/bootstrapJulia.jl"
+  config.vm.provision :shell, privileged: false, :path => ".provision/bootstrapJulia.jl"
   # run configure Jupyter script
-  config.vm.provision :shell, privileged: false, :path => "scripts/configureJupyter.sh"
+  config.vm.provision :shell, privileged: false, :path => ".provision/configureJupyter.sh"
   # cleanup after provisioning
-  config.vm.provision :shell, privileged: false, :path => "scripts/cleanup.sh"
+  config.vm.provision :shell, privileged: false, :path => ".provision/cleanup.sh"
   
   # ------------------------------------------------------------------------
 
@@ -103,7 +103,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # this doesnt work very well - it will caus vagrant to display disconnection
       # message during provisioning. vagrant-reload plugin would be probably better
       # see: https://github.com/aidanns/vagrant-reload
-      # config.vm.provision :shell, privileged: true, :path => "scripts/reboot.sh"
+      # config.vm.provision :shell, privileged: true, :path => ".provision/reboot.sh"
   end
 
   # ============================= always run =============================

@@ -1,13 +1,13 @@
 # Scibox
 
 Vagrant box aimed at bootstraping the work with scientific computation packages
-like [jupyter](http://jupyter.org/) and [julia](http://julialang.org/). 
+like [jupyter](http://jupyter.org/) and [julia](http://julialang.org/).
 
 Currently it is in pre-alpha stage.
 
 ## Getting Started
 
-First of all you will need to [install vagrant](https://www.vagrantup.com/docs/installation/). 
+First of all you will need to [install vagrant](https://www.vagrantup.com/docs/installation/).
 
 Then:
 
@@ -31,9 +31,10 @@ All project files should be placed in `projects` directory. My projects are in [
 ### Using Hydrogen
 
 If you are using [Hydrogen](https://github.com/nteract/hydrogen), you will need to configure [hydrogen kernel gateways](https://github.com/nteract/hydrogen#remote-kernels-via-kernel-gateways):
- - start [Atom IDE](https://atom.io/)
- - press `Ctrl + ,` and go to `Packages > Hydrogen > Settings`
- - into `List of kernel gateways to use` past following: 
+
+- start [Atom IDE](https://atom.io/)
+- press `Ctrl + ,` and go to `Packages > Hydrogen > Settings`
+- into `List of kernel gateways to use` past following:
 
 ```json
 [{ "name": "Scibox", "options": {"baseUrl": "http://localhost:8888", "token": "scibox" }}]
@@ -49,12 +50,12 @@ jupyter notebook list
 
 ## Based on
 
-* [Ubuntu 16.04.1 LTS (Xenial Xerus)](http://releases.ubuntu.com/16.04/) - Linux distro
-* [VAGRANT](https://www.vagrantup.com/) - VM manager
-* [conda](https://github.com/conda/conda) - Conda package manager
-* [jupyter/notebook](https://github.com/jupyter/notebook) - jupyter notebooks
-* [JupyterLab](https://github.com/jupyter/notebook) - JupyterLab computational environment
-* [julia](https://github.com/JuliaLang/julia) - Julia language
+- [Ubuntu 16.04.1 LTS (Xenial Xerus)](http://releases.ubuntu.com/16.04/) - Linux distro
+- [VAGRANT](https://www.vagrantup.com/) - VM manager
+- [conda](https://github.com/conda/conda) - Conda package manager
+- [jupyter/notebook](https://github.com/jupyter/notebook) - jupyter notebooks
+- [JupyterLab](https://github.com/jupyter/notebook) - JupyterLab computational environment
+- [julia](https://github.com/JuliaLang/julia) - Julia language
 
 ## Versioning
 
@@ -62,7 +63,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Martin Zamba** - *Initial work* - [infiRD](https://github.com/infiRD)
+- **Martin Zamba** - *Initial work* - [infiRD](https://github.com/infiRD)
 
 ## License
 

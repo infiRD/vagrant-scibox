@@ -1,4 +1,4 @@
-#!/home/vagrant/julia/bin/julia
+#!/home/vagrant/.julia/bin/julia
 
 println("Julia: installing IJulia kernel...")
 
