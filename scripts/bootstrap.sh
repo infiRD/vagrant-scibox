@@ -4,7 +4,7 @@
 sudo ./waitForApt.sh
 
 # install conda: 
-echo "Installing conda ..."
+echo "Installing conda..."
 
 # ======================== install conda ============================
 # https://conda.io/docs/help/silent.html#linux-and-os-x
@@ -27,8 +27,6 @@ rm $HOME/miniconda-latest.sh
 conda update conda -y
 conda install -y jupyter ipython numpy scipy pandas matplotlib \
                  anaconda-client scikit-image
-
-
 
 # jupyter lab
 # see: https://github.com/jupyterlab/jupyterlab
