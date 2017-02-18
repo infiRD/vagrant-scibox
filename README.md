@@ -1,4 +1,4 @@
-# Scibox
+# vagrant-scibox
 
 Vagrant box aimed at bootstraping the work with scientific computation packages
 like [jupyter](http://jupyter.org/) and [julia](http://julialang.org/).
@@ -13,8 +13,8 @@ Then:
 
 ```bash
 cd ~
-git clone https://github.com/infiRD/Scibox.git
-cd Scibox
+git clone https://github.com/infiRD/vagrant-scibox.git
+cd vagrant-scibox
 vagrant up && vagrant ssh
 ```
 
@@ -26,7 +26,7 @@ UPGRADE=true vagrant up && vagrant reload && vagrant ssh
 
 After proper startup, jupyter notebook should be available on [http://localhost:8888?token=scibox](http://localhost:8888?token=scibox).
 
-All project files should be placed in `projects` directory. My projects are in [separate repository](https://github.com/infiRD/Scibox-projects).
+All project files should be placed in `projects` directory. My projects are in [separate repository](https://github.com/infiRD/scibox-projects).
 
 ### Using Hydrogen
 
