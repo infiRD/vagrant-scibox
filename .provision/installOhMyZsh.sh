@@ -21,3 +21,12 @@ sudo cp ~/.oh-my-zsh /root/.oh-my-zsh -a
 sudo cp ~/.oh-my-zsh/templates/zshrc.zsh-template /root/.zshrc
 sudo chsh -s /bin/zsh root
 
+
+# ----------------- LS_COLORS -----------------
+# - install and enable enhanced ls coloring 
+# see: https://github.com/trapd00r/LS_COLORS
+wget https://raw.github.com/trapd00r/LS_COLORS/master/LS_COLORS -O $HOME/.dircolors
+LS_COLORS='eval $(dircolors -b $HOME/.dircolors)'
+echo $LS_COLORS >> $HOME/.bashrc
+echo $LS_COLORS >> $HOME/.zshrc
+
