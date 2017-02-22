@@ -54,6 +54,8 @@ jupyter notebook list
 - [jupyter/notebook](https://github.com/jupyter/notebook) - jupyter notebooks
 - [JupyterLab](https://github.com/jupyter/notebook) - JupyterLab computational environment
 - [julia](https://github.com/JuliaLang/julia) - Julia language
+- [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+- [LS_COLORS](https://github.com/trapd00r/LS_COLORS)
 
 ## Versioning
 
